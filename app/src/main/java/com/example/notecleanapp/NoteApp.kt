@@ -1,7 +1,7 @@
-package com.example.notecleanapp.di
+package com.example.notecleanapp
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
-class App : Application()
+class NoteApp : Application()
