@@ -7,11 +7,11 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class NoteRepositoryImpl @Inject constructor(private val dao: NoteDao) : NoteRepository {
-    override fun getAllNotes(): Flow<List<Note>> {
+    override suspend fun getAllNotes(): List<Note> {
         return dao.getAllNotes()
     }
 
-    override suspend fun getNoteById(id: Long): Note? {
+    override suspend fun getNoteById(id: Int): Note? {
         return dao.getNoteById(id)
     }
 
