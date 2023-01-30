@@ -20,7 +20,7 @@ class MainViewModel @Inject constructor(
 
     override fun getAllNotes() {
         viewModelScope.launch {
-            getNotesUseCase.getNotes().let {
+            getNotesUseCase.invoke().let {
                 _notes.postValue(it)
             }
         }

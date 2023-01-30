@@ -12,6 +12,7 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
@@ -27,7 +28,7 @@ import com.example.notecleanapp.presentation.ui.theme.backgroundColor
 @Composable
 fun MainScreen() {
     val viewModel: MainViewModel = hiltViewModel()
-    val notes = viewModel.notes.value
+    val notes = viewModel.notes.observeAsState(listOf()).value
 
     Scaffold(
         floatingActionButton = {
@@ -48,7 +49,7 @@ fun MainScreen() {
 
             )
 
-            notes?.forEach { note ->
+            notes.forEach { note ->
                 NoteItem(
                     title = note.title,
                     backgroundColor = Color(note.backgroundColor),
