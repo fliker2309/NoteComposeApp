@@ -14,11 +14,11 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.notecleanapp.domain.model.Note
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.notecleanapp.presentation.screens.main.MainViewModel
 import com.example.notecleanapp.presentation.ui.components.NoteItem
 import com.example.notecleanapp.presentation.ui.theme.NoteCleanAppTheme
 import com.example.notecleanapp.presentation.ui.theme.backgroundColor
@@ -26,13 +26,9 @@ import com.example.notecleanapp.presentation.ui.theme.backgroundColor
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun MainScreen() {
-    val notes: List<Note> = listOf(
-        Note(
-            title = "test",
-            content = "testovi",
-            backgroundColor = Color(0xFF232323).toArgb()
-        )
-    )
+    val viewModel: MainViewModel = hiltViewModel()
+    val notes = viewModel.notes.value
+
     Scaffold(
         floatingActionButton = {
             FloatingActionButton(onClick = { /*TODO*/ }) {
@@ -52,7 +48,7 @@ fun MainScreen() {
 
             )
 
-            notes.forEach { note ->
+            notes?.forEach { note ->
                 NoteItem(
                     title = note.title,
                     backgroundColor = Color(note.backgroundColor),

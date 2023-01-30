@@ -6,9 +6,9 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 interface GetNotesUseCase {
-    fun getNotes(): Flow<List<Note>>
+    fun getNotes(): List<Note>
     class Base @Inject constructor(private val repository: NoteRepository) : GetNotesUseCase {
-        override fun getNotes(): Flow<List<Note>> {
+        override fun getNotes(): List<Note> {
             return repository.getAllNotes()
         }
     }
