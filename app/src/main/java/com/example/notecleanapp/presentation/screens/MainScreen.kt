@@ -19,6 +19,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.example.notecleanapp.presentation.navigation.Screens
 import com.example.notecleanapp.presentation.screens.main.MainViewModel
 import com.example.notecleanapp.presentation.ui.components.NoteItem
 import com.example.notecleanapp.presentation.ui.theme.NoteCleanAppTheme
@@ -26,13 +29,13 @@ import com.example.notecleanapp.presentation.ui.theme.backgroundColor
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun MainScreen() {
+fun MainScreen(navController: NavController) {
     val viewModel: MainViewModel = hiltViewModel()
     val notes = viewModel.notes.observeAsState(listOf()).value
 
     Scaffold(
         floatingActionButton = {
-            FloatingActionButton(onClick = { /*TODO*/ }) {
+            FloatingActionButton(onClick = { navController.navigate(Screens.AddScreen.route) }) {
                 Icon(imageVector = Icons.Filled.Add, tint = Color.White, contentDescription = "add")
             }
         }
@@ -67,6 +70,6 @@ fun MainScreen() {
 @Composable
 fun previewMainScreen() {
     NoteCleanAppTheme {
-        MainScreen()
+        MainScreen(rememberNavController())
     }
 }

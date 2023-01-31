@@ -19,7 +19,7 @@ fun SetupNavHost(navController: NavHostController) {
         startDestination = Screens.MainScreen.route
     ) {
         composable(route = Screens.MainScreen.route) {
-            MainScreen()
+            MainScreen(navController)
         }
         composable(route = Screens.DetailsScreen.route) {
         }
