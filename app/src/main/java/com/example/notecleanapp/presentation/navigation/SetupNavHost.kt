@@ -5,6 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.notecleanapp.presentation.screens.MainScreen
+import com.example.notecleanapp.presentation.screens.add.AddScreen
 
 sealed class Screens(val route: String) {
     object MainScreen : Screens(route = "main_screen")
@@ -24,6 +25,7 @@ fun SetupNavHost(navController: NavHostController) {
         composable(route = Screens.DetailsScreen.route) {
         }
         composable(route = Screens.AddScreen.route) {
+            AddScreen(navController)
         }
     }
 }
