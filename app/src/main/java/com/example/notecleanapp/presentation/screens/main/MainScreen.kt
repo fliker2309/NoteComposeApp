@@ -1,6 +1,7 @@
 package com.example.notecleanapp.presentation.screens
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -19,6 +20,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.example.notecleanapp.presentation.navigation.Screens
 import com.example.notecleanapp.presentation.screens.main.MainViewModel
 import com.example.notecleanapp.presentation.ui.components.NoteItem
 import com.example.notecleanapp.presentation.ui.theme.NoteCleanAppTheme
@@ -26,13 +30,13 @@ import com.example.notecleanapp.presentation.ui.theme.backgroundColor
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun MainScreen() {
+fun MainScreen(navController: NavController) {
     val viewModel: MainViewModel = hiltViewModel()
     val notes = viewModel.notes.observeAsState(listOf()).value
 
     Scaffold(
         floatingActionButton = {
-            FloatingActionButton(onClick = { /*TODO*/ }) {
+            FloatingActionButton(onClick = { navController.navigate(Screens.AddScreen.route) }) {
                 Icon(imageVector = Icons.Filled.Add, tint = Color.White, contentDescription = "add")
             }
         }
@@ -47,6 +51,7 @@ fun MainScreen() {
                 modifier = Modifier
                     .padding(top = 42.dp, start = 24.dp, bottom = 12.dp)
 
+
             )
 
             notes.forEach { note ->
@@ -57,6 +62,7 @@ fun MainScreen() {
                         .fillMaxWidth()
                         .padding(horizontal = 24.dp)
                         .padding(vertical = 12.dp)
+                        .clickable { navController.navigate(Screens.DetailsScreen.route + "/${note.id}") }
                 )
             }
         }
@@ -67,6 +73,6 @@ fun MainScreen() {
 @Composable
 fun previewMainScreen() {
     NoteCleanAppTheme {
-        MainScreen()
+        MainScreen(rememberNavController())
     }
 }

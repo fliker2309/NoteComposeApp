@@ -2,9 +2,13 @@ package com.example.notecleanapp.presentation.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import com.example.notecleanapp.presentation.screens.MainScreen
+import com.example.notecleanapp.presentation.screens.add.AddScreen
+import com.example.notecleanapp.presentation.screens.details.DetailsScreen
 
 sealed class Screens(val route: String) {
     object MainScreen : Screens(route = "main_screen")
@@ -19,11 +23,16 @@ fun SetupNavHost(navController: NavHostController) {
         startDestination = Screens.MainScreen.route
     ) {
         composable(route = Screens.MainScreen.route) {
-            MainScreen()
+            MainScreen(navController)
         }
-        composable(route = Screens.DetailsScreen.route) {
+        composable(
+            route = Screens.DetailsScreen.route + "/{id}",
+            arguments = listOf(navArgument("id") { type = NavType.StringType })
+        ) {
+            DetailsScreen(navController, it.arguments?.getString("id"))
         }
         composable(route = Screens.AddScreen.route) {
+            AddScreen(navController)
         }
     }
 }
