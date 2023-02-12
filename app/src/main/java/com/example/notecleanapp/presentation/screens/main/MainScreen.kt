@@ -1,6 +1,7 @@
 package com.example.notecleanapp.presentation.screens
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -50,6 +51,7 @@ fun MainScreen(navController: NavController) {
                 modifier = Modifier
                     .padding(top = 42.dp, start = 24.dp, bottom = 12.dp)
 
+
             )
 
             notes.forEach { note ->
@@ -60,6 +62,7 @@ fun MainScreen(navController: NavController) {
                         .fillMaxWidth()
                         .padding(horizontal = 24.dp)
                         .padding(vertical = 12.dp)
+                        .clickable { navController.navigate(Screens.DetailsScreen.route + "/${note.id}") }
                 )
             }
         }

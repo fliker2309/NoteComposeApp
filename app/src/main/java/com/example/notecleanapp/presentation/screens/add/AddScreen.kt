@@ -2,6 +2,7 @@ package com.example.notecleanapp.presentation.screens.add
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
@@ -20,15 +21,21 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.notecleanapp.domain.model.Note
+import com.example.notecleanapp.presentation.navigation.Screens
 import com.example.notecleanapp.presentation.ui.theme.NoteCleanAppTheme
+import kotlin.random.Random
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun AddScreen(navController: NavController) {
+    val viewModel = hiltViewModel<AddViewModel>()
     var title by rememberSaveable { (mutableStateOf("")) }
     var description by rememberSaveable { (mutableStateOf("")) }
 
@@ -49,6 +56,7 @@ fun AddScreen(navController: NavController) {
                         .height(48.dp)
                         .clip(RoundedCornerShape(15.dp))
                         .background(color = Color(0xFF3B3B3B))
+                        .clickable { navController.popBackStack() }
 
                 ) {
                     Icon(
@@ -64,6 +72,22 @@ fun AddScreen(navController: NavController) {
                         .height(48.dp)
                         .clip(RoundedCornerShape(15.dp))
                         .background(color = Color(0xFF3B3B3B))
+                        .clickable {
+                            val color = Color(
+                                Random.nextInt(256),
+                                Random.nextInt(256),
+                                Random.nextInt(256)
+                            ).toArgb()
+                            viewModel.addNote(
+                                Note(
+                                    title = title,
+                                    content = description,
+                                    backgroundColor = color
+                                )
+                            ) {
+                                navController.navigate(Screens.MainScreen.route)
+                            }
+                        }
 
                 ) {
                     Icon(
