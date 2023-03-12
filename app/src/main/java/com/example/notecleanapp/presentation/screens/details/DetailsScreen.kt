@@ -22,6 +22,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -94,15 +95,15 @@ fun DetailsScreen(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(horizontal = 32.dp)
-                    .padding(top = 16.dp),
+                    .padding(top = 24.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Top
             )
             {
                 Text(
                     text = note?.title ?: "",
-                    fontSize = 35.sp,
-                    style = TextStyle(color = Color(0xFF303030), fontWeight = FontWeight.Light)
+                    fontSize = 48.sp,
+                    style = TextStyle(fontStyle = FontStyle.Italic,  color = Color(0xFF303030), fontWeight = FontWeight.Light)
                 )
                 Text(
                     text = note?.content ?: "",
