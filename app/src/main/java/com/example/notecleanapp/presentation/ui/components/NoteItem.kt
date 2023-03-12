@@ -26,7 +26,7 @@ fun NoteItem(title: String, backgroundColor: Color, modifier: Modifier) {
             Text(
                 text = title,
                 fontSize = 25.sp,
-                color = Color(0xFF303030),
+                color = Color(0xFF030303),
                 modifier = Modifier
                     .align(Alignment.Center)
                     .padding(vertical = 22.dp)

@@ -48,6 +48,7 @@ fun MainScreen(navController: NavController) {
             Text(
                 text = "Notes",
                 fontSize = 42.sp,
+                color = Color(0xFF252525),
                 modifier = Modifier
                     .padding(top = 42.dp, start = 24.dp, bottom = 12.dp)
 

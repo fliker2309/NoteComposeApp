@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
@@ -12,10 +13,13 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -69,7 +73,7 @@ fun DetailsScreen(
                         .clip(RoundedCornerShape(15.dp))
                         .background(color = Color(0xFF3B3B3B))
                         .clickable {
-                            viewModel.deleteNote{
+                            viewModel.deleteNote {
                                 navController.navigate(Screens.MainScreen.route)
                             }
                         }
@@ -85,25 +89,27 @@ fun DetailsScreen(
             }
         }
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(horizontal = 32.dp)
-                .padding(top = 64.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
-            Text(
-                text = note?.title ?: "",
-                fontSize = 35.sp,
-                style = TextStyle(color = Color(0xFF303030), fontWeight = FontWeight.Light)
-
+        SelectionContainer {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(horizontal = 32.dp)
+                    .padding(top = 16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Top
             )
-            Text(
-                text = note?.content ?: "",
-                fontSize = 24.sp,
-                style = TextStyle(color = Color(0xFF303030), fontWeight = FontWeight.Light)
-            )
+            {
+                Text(
+                    text = note?.title ?: "",
+                    fontSize = 35.sp,
+                    style = TextStyle(color = Color(0xFF303030), fontWeight = FontWeight.Light)
+                )
+                Text(
+                    text = note?.content ?: "",
+                    fontSize = 24.sp,
+                    style = TextStyle(color = Color(0xFF303030), fontWeight = FontWeight.Light)
+                )
+            }
         }
     }
 }

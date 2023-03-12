@@ -8,4 +8,4 @@ val Purple700 = Color(0xFF3700B3)
 
 val darkGrey = Color(0xFF252525)
 
-val backgroundColor = Color(0xFFE5E5E5)
+val backgroundColor = Color(0xFF9B9696)
